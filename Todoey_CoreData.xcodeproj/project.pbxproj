@@ -58,16 +58,40 @@
 		2ECAB1282683F6F5009AB045 /* Todoey_CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				2ECAB1422683F720009AB045 /* Models */,
 				2ECAB1292683F6F5009AB045 /* AppDelegate.swift */,
 				2ECAB12B2683F6F5009AB045 /* SceneDelegate.swift */,
-				2ECAB12D2683F6F5009AB045 /* ViewController.swift */,
-				2ECAB12F2683F6F5009AB045 /* Main.storyboard */,
+				2ECAB1412683F719009AB045 /* Controllers */,
+				2ECAB1402683F712009AB045 /* Views */,
 				2ECAB1352683F6F7009AB045 /* Assets.xcassets */,
 				2ECAB1372683F6F7009AB045 /* LaunchScreen.storyboard */,
 				2ECAB13A2683F6F7009AB045 /* Info.plist */,
 				2ECAB1322683F6F5009AB045 /* Todoey_CoreData.xcdatamodeld */,
 			);
 			path = Todoey_CoreData;
+			sourceTree = "<group>";
+		};
+		2ECAB1402683F712009AB045 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2ECAB12F2683F6F5009AB045 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2ECAB1412683F719009AB045 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2ECAB12D2683F6F5009AB045 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2ECAB1422683F720009AB045 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
