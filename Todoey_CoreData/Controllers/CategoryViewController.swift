@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class CategoryViewController: UITableViewController {
+class CategoryViewController: SwipeViewController {
     @IBOutlet var searchBar: UISearchBar!
     var categories: [Category]? = [Category]()
     let appDelegate: AppDelegate = (UIApplication.shared.delegate) as! AppDelegate
@@ -103,7 +103,7 @@ extension CategoryViewController {
         return self.categories?.count ?? 1
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell: UITableViewCell = super.tableView(self.tableView, cellForRowAt: indexPath)
         if let category: Category = self.categories?[indexPath.row] {
             cell.textLabel?.text = category.name
         }

@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class ItemViewController: UITableViewController {
+class ItemViewController: SwipeViewController {
     @IBOutlet var searchBar: UISearchBar!
     var items: [Item]? = [Item]()
     let appDelegate: AppDelegate = (UIApplication.shared.delegate) as! AppDelegate
@@ -56,7 +56,7 @@ extension ItemViewController {
         return self.items?.count ?? 1
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell: UITableViewCell = super.tableView(self.tableView, cellForRowAt: indexPath)
         if let item: Item = self.items?[indexPath.row] {
             cell.textLabel?.text = item.name
             cell.accessoryType = item.isChecked ? .checkmark : .none
