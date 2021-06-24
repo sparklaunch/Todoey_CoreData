@@ -18,8 +18,7 @@ class ItemViewController: UITableViewController {
     var parentCategory: Category? {
         didSet {
             let parentCategoryName: String = self.parentCategory!.name!
-            let predicate: NSPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", parentCategoryName)
-            self.fetchItems(with: predicate)
+            self.fetchItems()
             self.initialize(with: parentCategoryName)
         }
     }
@@ -115,6 +114,8 @@ extension ItemViewController {
 extension ItemViewController {
     func fetchItems() {
         let request: NSFetchRequest<Item> = Item.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", self.parentCategory!.name!)
+        request.predicate = predicate
         do {
             self.items = try self.context.fetch(request)
             DispatchQueue.main.async {
@@ -138,6 +139,24 @@ extension ItemViewController {
         catch let error {
             let localizedError: String = error.localizedDescription
             print(localizedError)
+        }
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension ItemViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let text: String = self.searchBar.text!
+        let searchPredicate: NSPredicate = NSPredicate(format: "name CONTAINS[cd] %@", text)
+        let categoryPredicate: NSPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", self.parentCategory!.name!)
+        let compoundPredicate: NSCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [searchPredicate, categoryPredicate])
+        self.fetchItems(with: compoundPredicate)
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if self.searchBar.text!.count == 0 {
+            self.searchBar.resignFirstResponder()
+            self.fetchItems()
         }
     }
 }
