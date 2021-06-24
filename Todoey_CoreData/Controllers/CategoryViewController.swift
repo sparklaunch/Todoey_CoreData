@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 
 class CategoryViewController: UITableViewController {
+    @IBOutlet var searchBar: UISearchBar!
     var categories: [Category]? = [Category]()
     let appDelegate: AppDelegate = (UIApplication.shared.delegate) as! AppDelegate
     var context: NSManagedObjectContext {
@@ -79,9 +80,23 @@ extension CategoryViewController {
             print(localizedError)
         }
     }
+    func fetchCategories(with predicate: NSPredicate) {
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        request.predicate = predicate
+        do {
+            self.categories = try self.context.fetch(request)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        catch let error {
+            let localizedError: String = error.localizedDescription
+            print(localizedError)
+        }
+    }
 }
 
-// MARK: - TableViewDataSource
+// MARK: - UITableViewDataSource
 
 extension CategoryViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -96,5 +111,31 @@ extension CategoryViewController {
             cell.textLabel?.text = "No categories yet."
         }
         return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension CategoryViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension CategoryViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let text: String = self.searchBar.text!
+        let predicate: NSPredicate = NSPredicate(format: "name CONTAINS[cd] %@", text)
+        self.fetchCategories(with: predicate)
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.count == 0 {
+            self.searchBar.resignFirstResponder()
+            DispatchQueue.main.async {
+                self.fetchCategories()
+            }
+        }
     }
 }
