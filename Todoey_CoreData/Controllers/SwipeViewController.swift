@@ -37,6 +37,12 @@ extension SwipeViewController: SwipeTableViewCellDelegate {
         cell.delegate = self
         return cell
     }
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options: SwipeOptions = SwipeOptions()
+        options.expansionStyle = .destructive
+        options.transitionStyle = .border
+        return options
+    }
 }
 
 // MARK: - Initialization
