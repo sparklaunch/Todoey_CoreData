@@ -39,6 +39,22 @@ class ItemViewController: SwipeViewController {
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
+    override func remove(at index: Int) {
+        if let targetItem: Item = self.items?[index] {
+            self.context.delete(targetItem)
+            self.items?.remove(at: index)
+            do {
+                try self.context.save()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+            catch let error {
+                let localizedError: String = error.localizedDescription
+                print(localizedError)
+            }
+        }
+    }
 }
 
 // MARK: - Initialization

@@ -11,6 +11,10 @@ import SwipeCellKit
 class SwipeViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.superInitialize()
+    }
+    func remove(at index: Int) {
+        // Subclasses will do the task.
     }
 }
 
@@ -23,7 +27,7 @@ extension SwipeViewController: SwipeTableViewCellDelegate {
             return nil
         }
         let deleteAction: SwipeAction = SwipeAction(style: .destructive, title: "Delete") { (swipeAction: SwipeAction, indexPath: IndexPath) in
-            
+            self.remove(at: indexPath.row)
         }
         deleteAction.image = UIImage(systemName: "trash")
         return [deleteAction]
@@ -32,5 +36,13 @@ extension SwipeViewController: SwipeTableViewCellDelegate {
         let cell: SwipeTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "Cell") as! SwipeTableViewCell
         cell.delegate = self
         return cell
+    }
+}
+
+// MARK: - Initialization
+
+extension SwipeViewController {
+    func superInitialize() {
+        self.tableView.rowHeight = 80
     }
 }

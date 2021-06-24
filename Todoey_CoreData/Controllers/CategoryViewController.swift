@@ -33,6 +33,22 @@ class CategoryViewController: SwipeViewController {
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
+    override func remove(at index: Int) {
+        if let targetCategory: Category = self.categories?[index] {
+            self.context.delete(targetCategory)
+            self.categories?.remove(at: index)
+            do {
+                try self.context.save()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+            catch let error {
+                let localizedError: String = error.localizedDescription
+                print(localizedError)
+            }
+        }
+    }
 }
 
 // MARK: - Initialization
