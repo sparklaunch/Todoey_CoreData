@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 
 class ItemViewController: UITableViewController {
+    @IBOutlet var searchBar: UISearchBar!
     var items: [Item]? = [Item]()
     let appDelegate: AppDelegate = (UIApplication.shared.delegate) as! AppDelegate
     var context: NSManagedObjectContext {
@@ -59,6 +60,7 @@ extension ItemViewController {
         let cell: UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         if let item: Item = self.items?[indexPath.row] {
             cell.textLabel?.text = item.name
+            cell.accessoryType = item.isChecked ? .checkmark : .none
         }
         else {
             cell.textLabel?.text = "No items added yet."
@@ -71,7 +73,19 @@ extension ItemViewController {
 
 extension ItemViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if let selectedItem: Item = self.items?[indexPath.row] {
+            selectedItem.isChecked.toggle()
+            do {
+                try self.context.save()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+            catch let error {
+                let localizedError: String = error.localizedDescription
+                print(localizedError)
+            }
+        }
     }
 }
 
