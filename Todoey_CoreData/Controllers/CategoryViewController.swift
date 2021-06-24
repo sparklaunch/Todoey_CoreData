@@ -118,7 +118,17 @@ extension CategoryViewController {
 
 extension CategoryViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        self.performSegue(withIdentifier: "goToItems", sender: self)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToItems" {
+            if let selectedRow: Int = self.tableView.indexPathForSelectedRow?.row {
+                if let selectedCategory: Category = self.categories?[selectedRow] {
+                    let destination: ItemViewController = segue.destination as! ItemViewController
+                    destination.parentCategory = selectedCategory
+                }
+            }
+        }
     }
 }
 

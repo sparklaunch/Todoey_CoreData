@@ -14,6 +14,7 @@
 		2ECAB1362683F6F7009AB045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECAB1352683F6F7009AB045 /* Assets.xcassets */; };
 		2ECAB1392683F6F7009AB045 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECAB1372683F6F7009AB045 /* LaunchScreen.storyboard */; };
 		2ECAB1442683F78B009AB045 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECAB1432683F78B009AB045 /* CategoryViewController.swift */; };
+		2ECAB14626840663009AB045 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECAB14526840663009AB045 /* ItemViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2ECAB1382683F6F7009AB045 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2ECAB13A2683F6F7009AB045 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2ECAB1432683F78B009AB045 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		2ECAB14526840663009AB045 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				2ECAB1432683F78B009AB045 /* CategoryViewController.swift */,
+				2ECAB14526840663009AB045 /* ItemViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			files = (
 				2ECAB1442683F78B009AB045 /* CategoryViewController.swift in Sources */,
 				2ECAB12A2683F6F5009AB045 /* AppDelegate.swift in Sources */,
+				2ECAB14626840663009AB045 /* ItemViewController.swift in Sources */,
 				2ECAB1342683F6F5009AB045 /* Todoey_CoreData.xcdatamodeld in Sources */,
 				2ECAB12C2683F6F5009AB045 /* SceneDelegate.swift in Sources */,
 			);
